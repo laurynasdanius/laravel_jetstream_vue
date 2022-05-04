@@ -14,14 +14,20 @@
         Link
     } from '@inertiajs/inertia-vue3';
 
-    defineProps({
-        workspaces: Object
+    let props = defineProps({
+        workspaces: Object,
+        filters: Object
     });
 
     //search
-    let search = ref('');
+    let search = ref(props.filters.search);
 
-    watch
+    watch(search, value=>{
+        Inertia.get('/workspaces',{ search: value },{
+            preserveState: true,
+            replace: true
+        });
+    });
 </script>
 <template>
 

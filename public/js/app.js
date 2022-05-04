@@ -24265,15 +24265,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    workspaces: Object
+    workspaces: Object,
+    filters: Object
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
-    expose(); //search
+    expose();
+    var props = __props; //search
 
-    var search = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
-    vue__WEBPACK_IMPORTED_MODULE_2__.watch;
+    var search = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(props.filters.search);
+    (0,vue__WEBPACK_IMPORTED_MODULE_2__.watch)(search, function (value) {
+      _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.get('/workspaces', {
+        search: value
+      }, {
+        preserveState: true,
+        replace: true
+      });
+    });
     var __returned__ = {
+      props: props,
       search: search,
       Layout: _Layouts_Layout_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
       Paginator: _Components_Paginator__WEBPACK_IMPORTED_MODULE_1__["default"],

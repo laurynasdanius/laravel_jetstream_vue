@@ -63,7 +63,7 @@ Route::middleware([
         Route::resource('workspaces', WorkspacesController::class);
     });
     */ 
-   
+   //Workspace route
     Route::middleware([
         'auth:sanctum',
         config('jetstream.auth_session'),
@@ -73,13 +73,21 @@ Route::middleware([
         /* Getting all the workspaces from the database and mapping them to the workspace_name
         variable. */
         Route::get('/workspaces', function () {
-            return Inertia::render('TestPage',[
-                'workspaces' => Workspace::paginate(3)->through(fn($workspace) => [
+            return Inertia::render('TestPage', [
+                'workspaces' => Workspace::query()
+                ->when(Request::input('search'), function ($query, $search) {
+                    $query->where('workspace_name','like', "%{$search}%");
+                })
+                ->paginate(3)
+                ->withQueryString()
+                ->through(fn($workspace) => [
                     'id' => $workspace->id,
                     'workspace_name'=> $workspace->workspace_name,
                     'workspace_description'=> $workspace->workspace_description
-                ])
+                ]),
+                'filters'=> Request::only(['search'])
             ]);
         })->name('workspaces');
+
     });
     
