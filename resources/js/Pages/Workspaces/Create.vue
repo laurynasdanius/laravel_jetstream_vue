@@ -1,18 +1,17 @@
 <script setup>
-import {reactive} from "vue";
-import {Inertia} from "@inertiajs/inertia";
+// import {ref} from "vue";
+// import {Inertia} from "@inertiajs/inertia";
+import {useForm} from "@inertiajs/inertia-vue3";
 
     defineProps({
         errors: Object
     });
-    let form = reactive({
+    let form = useForm({
         workspace_name:'',
-        workspace_description:'',
-        workspace_user_id:'',
+        workspace_description:''
     });
-    
-    let submit= ()=>{
-        Inertia.post('/workspaces',form);
+    let submit = () =>{
+        form.post('/workspaces');
     };
 </script>
 
@@ -35,7 +34,7 @@ import {Inertia} from "@inertiajs/inertia";
                 id="workspace_name"
                 required
             >
-            <div v-if="errors.workspace_name" v-text="errors.workspace_name" class="text-red-500 text-xs mt-1"/>
+            <div v-if="form.errors.workspace_name" v-text="form.errors.workspace_name" class="text-red-500 text-xs mt-1"/>
         </div>
         <!-- Workspace description-->
         <div class="mb-6">
@@ -50,12 +49,12 @@ import {Inertia} from "@inertiajs/inertia";
                 id="workspace_description"
                 required
             >
-            <div v-if="errors.workspace_description" v-text="errors.workspace_description" class="text-red-500 text-xs mt-1"/>
+            <div v-if="form.errors.workspace_description" v-text="form.errors.workspace_description" class="text-red-500 text-xs mt-1"/>
         </div>
         <!-- Submit button-->
         <div class="md-6">
             <button type="submit"
-                class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 justify-self-end float-right"
+                class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 justify-self-end float-right" :disabled="form.processing"
             >
                 Submit
             </button>

@@ -1,5 +1,8 @@
 <script setup>
     import Layout from '@/Layouts/Layout.vue';
+    //throttle
+    import throttle from "lodash/throttle";
+
     //paginator
     import Paginator from "../../Components/Paginator";
     import {
@@ -22,12 +25,12 @@
     //search
     let search = ref(props.filters.search);
 
-    watch(search, value=>{
+    watch(search, throttle(function(value){
         Inertia.get('/workspaces',{ search: value },{
             preserveState: true,
             replace: true
         });
-    });
+    },300));
 </script>
 <template>
 

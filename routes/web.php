@@ -108,6 +108,7 @@ Route::middleware([
             /* Creating a new workspace with the attributes that are passed to it. */
             Workspace::create($attributes);
         });
-        return redirect('/workspaces');
+        // return redirect('/workspaces');
+        return Inertia::render('Workspaces/Create')->with('success', 'Workspace created');
     });
     
