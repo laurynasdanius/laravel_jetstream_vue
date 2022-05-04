@@ -69,3 +69,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 composer require laravel/jetstream
 php artisan jetstream:install inertia
 npm install
+php artisan storage:link
