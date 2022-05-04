@@ -9,6 +9,6 @@ class Workspace extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'workspace_name', 'workspace_description'
+        'workspace_name', 'workspace_description','workspace_user_id'
     ];
 }

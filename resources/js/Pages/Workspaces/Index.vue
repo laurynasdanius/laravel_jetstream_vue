@@ -1,7 +1,7 @@
 <script setup>
     import Layout from '@/Layouts/Layout.vue';
     //paginator
-    import Paginator from "../Components/Paginator";
+    import Paginator from "../../Components/Paginator";
     import {
         defineProps,
         ref,

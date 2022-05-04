@@ -7,6 +7,8 @@ use Inertia\Inertia;
 //Workspaces
 use App\Http\Controllers\WorkspacesController;
 use App\Models\Workspace;
+//getting user id
+use Illuminate\Support\Facades\Auth;
 
 // use App\Models\Workspace;
 
@@ -73,7 +75,7 @@ Route::middleware([
         /* Getting all the workspaces from the database and mapping them to the workspace_name
         variable. */
         Route::get('/workspaces', function () {
-            return Inertia::render('TestPage', [
+            return Inertia::render('Workspaces/Index', [
                 'workspaces' => Workspace::query()
                 ->when(Request::input('search'), function ($query, $search) {
                     $query->where('workspace_name','like', "%{$search}%");
@@ -88,6 +90,24 @@ Route::middleware([
                 'filters'=> Request::only(['search'])
             ]);
         })->name('workspaces');
+        //route to the workspace create page
+        Route::get('workspaces/create', function() {
+            return Inertia::render('Workspaces/Create');
+        });
+        //workspace creation
+        Route::post('workspaces', function() {
+            $attributes = Request::validate([
+                'workspace_name' => 'bail|required|unique:workspaces|min:5',
+                'workspace_description' => 'required',
+            ]);
+            /* Getting the user id from the auth facade and assigning it to the workspace_user_id
+            variable. */
+            $attributes['workspace_user_id'] = Auth::user()->id;
+            
 
+            /* Creating a new workspace with the attributes that are passed to it. */
+            Workspace::create($attributes);
+        });
+        return redirect('/workspaces');
     });
     
