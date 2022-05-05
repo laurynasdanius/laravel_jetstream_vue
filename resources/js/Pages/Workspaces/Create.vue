@@ -2,6 +2,7 @@
 // import {ref} from "vue";
 // import {Inertia} from "@inertiajs/inertia";
 import {useForm} from "@inertiajs/inertia-vue3";
+import Layout from '@/Layouts/WorkspaceLayout.vue'; 
 
     defineProps({
         errors: Object
@@ -17,6 +18,7 @@ import {useForm} from "@inertiajs/inertia-vue3";
 
 
 <template>
+<Layout>
 <Head title="Create User"/>
     <h1 class="text-3xl">Create new user</h1>
 
@@ -60,4 +62,6 @@ import {useForm} from "@inertiajs/inertia-vue3";
             </button>
         </div>
     </form>
+    
+</Layout>
 </template>

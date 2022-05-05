@@ -1,5 +1,6 @@
 <script setup>
-    import Layout from '@/Layouts/Layout.vue';
+    // import Layout from '@/Layouts/Layout.vue';
+    import Layout from '@/Layouts/WorkspaceLayout.vue'; 
     //throttle
     import throttle from "lodash/throttle";
 
@@ -35,7 +36,7 @@
 <template>
 
     <Head>
-        <title>TestPage</title>
+        <title>Workspace Index</title>
     </Head>
 
     <Layout>

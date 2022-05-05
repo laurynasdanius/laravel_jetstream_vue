@@ -30,9 +30,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-Route::get('/test', function () {
-    return Inertia::render('TestPage');
-});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

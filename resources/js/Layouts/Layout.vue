@@ -9,7 +9,7 @@ export default {
 
 <template>
 
-    <p>tekstas from the layout</p>
+    
     <SideNav/>
    <slot/>
    
